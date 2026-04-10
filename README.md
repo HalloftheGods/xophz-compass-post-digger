@@ -27,7 +27,7 @@ An RSS feed aggregator and user curation spark natively integrated into YouMeOS.
 1. Ensure **Xophz COMPASS** is installed and active.
 2. Upload `xophz-compass-post-digger` to `/wp-content/plugins/`.
 3. Activate through the Plugins menu.
-4. Access via the COMPASS dashboard → **Lemon-Aid**.
+4. Access via the My Compass dashboard → **Lemon-Aid**.
 
 ## PHP Class Map
 
