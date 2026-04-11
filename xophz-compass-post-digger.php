@@ -96,3 +96,230 @@ function run_xophz_compass_post_digger() {
   }
 }
 add_action( 'plugins_loaded', 'run_xophz_compass_post_digger' );
+
+add_action( 'init', 'xophz_register_cafeteria_core_types', 10 );
+
+function xophz_register_cafeteria_core_types() {
+	// Register the Hierarchical Taxonomy (Boards / Categories)
+	$labels_taxonomy = array(
+		'name'              => _x( 'Cafeteria Boards', 'taxonomy general name', 'xophz-compass-post-digger' ),
+		'singular_name'     => _x( 'Cafeteria Board', 'taxonomy singular name', 'xophz-compass-post-digger' ),
+		'search_items'      => __( 'Search Boards', 'xophz-compass-post-digger' ),
+		'all_items'         => __( 'All Boards', 'xophz-compass-post-digger' ),
+		'parent_item'       => __( 'Parent Category', 'xophz-compass-post-digger' ),
+		'parent_item_colon' => __( 'Parent Category:', 'xophz-compass-post-digger' ),
+		'edit_item'         => __( 'Edit Board', 'xophz-compass-post-digger' ),
+		'update_item'       => __( 'Update Board', 'xophz-compass-post-digger' ),
+		'add_new_item'      => __( 'Add New Board', 'xophz-compass-post-digger' ),
+		'new_item_name'     => __( 'New Board Name', 'xophz-compass-post-digger' ),
+		'menu_name'         => __( 'Cafeteria Boards', 'xophz-compass-post-digger' ),
+	);
+
+	$args_taxonomy = array(
+		'hierarchical'      => true,
+		'labels'            => $labels_taxonomy,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'cafeteria-board' ),
+		'show_in_rest'      => true,
+		'rest_base'         => 'cafeteria_board',
+	);
+
+	register_taxonomy( 'cafeteria_board', array( 'cafeteria_topic' ), $args_taxonomy );
+
+	// Register the Custom Post Type (Topics / Threads)
+	$labels_cpt = array(
+		'name'                  => _x( 'Cafeteria Topics', 'Post type general name', 'xophz-compass-post-digger' ),
+		'singular_name'         => _x( 'Cafeteria Topic', 'Post type singular name', 'xophz-compass-post-digger' ),
+		'menu_name'             => _x( 'Cafeteria Topics', 'Admin Menu text', 'xophz-compass-post-digger' ),
+		'name_admin_bar'        => _x( 'Cafeteria Topic', 'Add New on Toolbar', 'xophz-compass-post-digger' ),
+		'add_new'               => __( 'Add New', 'xophz-compass-post-digger' ),
+		'add_new_item'          => __( 'Add New Topic', 'xophz-compass-post-digger' ),
+		'new_item'              => __( 'New Topic', 'xophz-compass-post-digger' ),
+		'edit_item'             => __( 'Edit Topic', 'xophz-compass-post-digger' ),
+		'view_item'             => __( 'View Topic', 'xophz-compass-post-digger' ),
+		'all_items'             => __( 'All Topics', 'xophz-compass-post-digger' ),
+		'search_items'          => __( 'Search Topics', 'xophz-compass-post-digger' ),
+		'parent_item_colon'     => __( 'Parent Topics:', 'xophz-compass-post-digger' ),
+		'not_found'             => __( 'No topics found.', 'xophz-compass-post-digger' ),
+		'not_found_in_trash'    => __( 'No topics found in Trash.', 'xophz-compass-post-digger' ),
+	);
+
+	$args_cpt = array(
+		'labels'             => $labels_cpt,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'cafeteria-topic' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => null,
+		'menu_icon'          => 'dashicons-format-chat',
+		'supports'           => array( 'title', 'editor', 'author', 'comments' ),
+		'show_in_rest'       => true,
+		'rest_base'          => 'cafeteria_topic',
+		'taxonomies'         => array( 'cafeteria_board' ),
+	);
+
+	register_post_type( 'cafeteria_topic', $args_cpt );
+}
+
+/**
+ * Register custom REST fields & Term Meta for Cafeteria
+ */
+add_action( 'init', 'xophz_register_cafeteria_board_meta' );
+function xophz_register_cafeteria_board_meta() {
+    register_term_meta( 'cafeteria_board', 'board_icon', array(
+        'type'         => 'string',
+        'single'       => true,
+        'show_in_rest' => true,
+    ));
+}
+
+add_action( 'rest_api_init', 'xophz_register_cafeteria_board_stats' );
+function xophz_register_cafeteria_board_stats() {
+    register_rest_field( 'cafeteria_board', 'stats', array(
+        'get_callback' => 'xophz_get_cafeteria_board_stats',
+        'schema'       => null,
+    ));
+    // Also register stats for individual topics to track replies and last activity
+    register_rest_field( 'cafeteria_topic', 'stats', array(
+        'get_callback' => 'xophz_get_cafeteria_topic_stats',
+        'schema'       => null,
+    ));
+}
+
+function xophz_get_cafeteria_board_stats( $term, $field_name, $request ) {
+    $term_id = $term['id'];
+    
+    // Default stats
+    $stats = array(
+        'topics'        => $term['count'],
+        'replies'       => 0,
+        'last_activity' => null
+    );
+
+    // Aggregate replies across all topics (all statuses)
+    $topics = get_posts( array(
+        'post_type'      => 'cafeteria_topic',
+        'post_status'    => 'any',
+        'posts_per_page' => -1,
+        'fields'         => 'ids',
+        'tax_query'      => array(
+            array(
+                'taxonomy' => 'cafeteria_board',
+                'field'    => 'term_id',
+                'terms'    => $term_id,
+            ),
+        ),
+    ));
+
+    $total_replies = 0;
+    foreach($topics as $topic_id) {
+        $comments_count = wp_count_comments($topic_id);
+        // Include all comments: approved & awaiting moderation
+        $total_replies += $comments_count->total_comments;
+    }
+    $stats['replies'] = $total_replies;
+
+    // Resolve latest activity
+    $last_activity = null;
+    $latest_ts = 0;
+
+    // 1. Check most recent topic
+    $latest_topic = get_posts( array(
+        'post_type'      => 'cafeteria_topic',
+        'post_status'    => 'any',
+        'posts_per_page' => 1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'tax_query'      => array(
+            array(
+                'taxonomy' => 'cafeteria_board',
+                'field'    => 'term_id',
+                'terms'    => $term_id,
+            ),
+        ),
+    ));
+    
+    if ( ! empty( $latest_topic ) ) {
+        $t = $latest_topic[0];
+        $latest_ts = strtotime($t->post_date);
+        $author_id = $t->post_author;
+        $last_activity = array(
+            'title'     => $t->post_title,
+            'timestamp' => $t->post_date,
+            'author'    => get_the_author_meta('display_name', $author_id) ?: 'Unknown',
+            'avatar'    => get_avatar_url($author_id, array('size' => 48))
+        );
+    }
+
+    // 2. Check most recent comment in these topics
+    if ( ! empty( $topics ) ) {
+        $latest_comment = get_comments( array(
+            'post_id__in' => $topics,
+            'number'      => 1,
+            'orderby'     => 'comment_date',
+            'order'       => 'DESC',
+            'status'      => 'all'
+        ));
+
+        if ( ! empty($latest_comment) ) {
+            $c = $latest_comment[0];
+            $c_ts = strtotime($c->comment_date);
+            if ( $c_ts > $latest_ts ) {
+                $p = get_post($c->comment_post_ID);
+                $last_activity = array(
+                    'title'     => 'Re: ' . $p->post_title,
+                    'timestamp' => $c->comment_date,
+                    'author'    => $c->comment_author,
+                    'avatar'    => get_avatar_url($c->comment_author_email, array('size' => 48))
+                );
+            }
+        }
+    }
+
+    $stats['last_activity'] = $last_activity;
+    
+    // Fallback topic true count if count is out-of-sync or missing
+    if (!empty($topics) && $stats['topics'] == 0) {
+        $stats['topics'] = count($topics);
+    }
+
+    return $stats;
+}
+
+function xophz_get_cafeteria_topic_stats( $post, $field_name, $request ) {
+    $topic_id = $post['id'];
+    $stats = array(
+        'replies'       => 0,
+        'views'         => 0, 
+        'last_activity' => null,
+    );
+
+    $comments_count = wp_count_comments($topic_id);
+    $stats['replies'] = $comments_count->total_comments;
+
+    $latest_comment = get_comments( array(
+        'post_id' => $topic_id,
+        'number'  => 1,
+        'orderby' => 'comment_date',
+        'order'   => 'DESC',
+        'status'  => 'all'
+    ));
+
+    if ( ! empty($latest_comment) ) {
+        $c = $latest_comment[0];
+        $stats['last_activity'] = array(
+            'timestamp' => $c->comment_date,
+            'author'    => $c->comment_author,
+            'avatar'    => get_avatar_url($c->comment_author_email, array('size' => 48))
+        );
+    }
+
+    return $stats;
+}
