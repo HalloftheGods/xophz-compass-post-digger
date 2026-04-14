@@ -323,3 +323,39 @@ function xophz_get_cafeteria_topic_stats( $post, $field_name, $request ) {
 
     return $stats;
 }
+
+add_action( 'init', 'xophz_seed_suggestion_box_boards', 20 );
+function xophz_seed_suggestion_box_boards() {
+    $taxonomy = 'cafeteria_board';
+    $parent_slug = 'suggestion-box';
+
+    $existing = term_exists( $parent_slug, $taxonomy );
+    if ( $existing ) return;
+
+    $parent = wp_insert_term( 'Suggestion Box', $taxonomy, array(
+        'slug'        => $parent_slug,
+        'description' => 'A place for ideas, feedback, and feature requests.',
+    ));
+
+    if ( is_wp_error( $parent ) ) return;
+
+    $parent_id = $parent['term_id'];
+    update_term_meta( $parent_id, 'board_icon', 'fal fa-box-ballot' );
+
+    $children = array(
+        array( 'name' => 'Ideas, Suggestions, Nuances',    'slug' => 'ideas-suggestions',  'icon' => 'fal fa-lightbulb-on',      'desc' => 'Share your ideas and suggestions for the platform.' ),
+        array( 'name' => 'Comments, Feedback, Shouts',     'slug' => 'comments-feedback',  'icon' => 'fal fa-comment-alt-dots',   'desc' => 'General comments and feedback about the experience.' ),
+        array( 'name' => 'Feature Requests',               'slug' => 'feature-requests',   'icon' => 'fal fa-flask-potion',       'desc' => 'Request new features and capabilities.' ),
+    );
+
+    foreach ( $children as $child ) {
+        $result = wp_insert_term( $child['name'], $taxonomy, array(
+            'slug'        => $child['slug'],
+            'description' => $child['desc'],
+            'parent'      => $parent_id,
+        ));
+        if ( ! is_wp_error( $result ) ) {
+            update_term_meta( $result['term_id'], 'board_icon', $child['icon'] );
+        }
+    }
+}
