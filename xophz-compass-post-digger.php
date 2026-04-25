@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Category:          Command Deck
  * Plugin Name:       Xophz Alphabet Soup
- * Plugin URI:        http://example.com/xophz-compass-post-digger-uri/
+ * Plugin URI:        https://github.com/HalloftheGods/xophz-compass-post-digger
  * Description:       Quickly add, edit, delete posts in this modern-day post manager.
  * Version:           26.4.24
  * Author:            Hall of the Gods, Inc.
