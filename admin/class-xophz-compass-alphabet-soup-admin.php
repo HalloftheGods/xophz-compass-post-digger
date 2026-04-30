@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Xophz_Compass_Post_Digger
- * @subpackage Xophz_Compass_Post_Digger/admin
+ * @package    Xophz_Compass_Alphabet_Soup
+ * @subpackage Xophz_Compass_Alphabet_Soup/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Xophz_Compass_Post_Digger
- * @subpackage Xophz_Compass_Post_Digger/admin
+ * @package    Xophz_Compass_Alphabet_Soup
+ * @subpackage Xophz_Compass_Alphabet_Soup/admin
  * @author     Your Name <email@example.com>
  */
-class Xophz_Compass_Post_Digger_Admin {
+class Xophz_Compass_Alphabet_Soup_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -65,15 +65,15 @@ class Xophz_Compass_Post_Digger_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Xophz_Compass_Post_Digger_Loader as all of the hooks are defined
+		 * defined in Xophz_Compass_Alphabet_Soup_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Xophz_Compass_Post_Digger_Loader will then create the relationship
+		 * The Xophz_Compass_Alphabet_Soup_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/xophz-compass-post-digger-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/xophz-compass-alphabet-soup-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,15 +88,15 @@ class Xophz_Compass_Post_Digger_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Xophz_Compass_Post_Digger_Loader as all of the hooks are defined
+		 * defined in Xophz_Compass_Alphabet_Soup_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Xophz_Compass_Post_Digger_Loader will then create the relationship
+		 * The Xophz_Compass_Alphabet_Soup_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/xophz-compass-post-digger-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/xophz-compass-alphabet-soup-admin.js', array( 'jquery' ), $this->version, false );
 
 
     wp_enqueue_script(

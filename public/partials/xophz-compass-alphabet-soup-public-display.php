@@ -8,8 +8,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Xophz_Compass_Post_Digger
- * @subpackage Xophz_Compass_Post_Digger/public/partials
+ * @package    Xophz_Compass_Alphabet_Soup
+ * @subpackage Xophz_Compass_Alphabet_Soup/public/partials
  */
 ?>
 

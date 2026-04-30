@@ -1,4 +1,4 @@
-# Xophz Lemon-Aid (Post Digger)
+# Xophz Lemon-Aid (Alphabet Soup)
 
 > **Category:** Trajectory · **Version:** 0.0.1
 
@@ -6,7 +6,7 @@ An RSS feed aggregator and user curation spark natively integrated into YouMeOS.
 
 ## Description
 
-**Lemon-Aid** (technically known as `xophz-compass-post-digger`) is an RSS aggregation engine for YouMeOS. It serves a dual purpose: operating as a personal feed reader where users can organize their preferred news sources, and acting as a crowdsourced curation engine for the global "Noosphere" collective feed.
+**Lemon-Aid** (technically known as `xophz-compass-alphabet-soup`) is an RSS aggregation engine for YouMeOS. It serves a dual purpose: operating as a personal feed reader where users can organize their preferred news sources, and acting as a crowdsourced curation engine for the global "Noosphere" collective feed.
 
 ### Core Capabilities
 
@@ -25,7 +25,7 @@ An RSS feed aggregator and user curation spark natively integrated into YouMeOS.
 ## Installation
 
 1. Ensure **Xophz COMPASS** is installed and active.
-2. Upload `xophz-compass-post-digger` to `/wp-content/plugins/`.
+2. Upload `xophz-compass-alphabet-soup` to `/wp-content/plugins/`.
 3. Activate through the Plugins menu.
 4. Access via the My Compass dashboard → **Lemon-Aid**.
 
@@ -33,8 +33,8 @@ An RSS feed aggregator and user curation spark natively integrated into YouMeOS.
 
 | Class | File | Purpose |
 |---|---|---|
-| `Xophz_Compass_Post_Digger` | `class-xophz-compass-post-digger.php` | Core plugin hooks, cron processing, and RSS fetching |
-| `Xophz_Compass_Post_Digger_API` | `class-xophz-compass-post-digger-api.php` | REST API for feeds, fetching, and Sugar/Lemon voting |
+| `Xophz_Compass_Alphabet_Soup` | `class-xophz-compass-alphabet-soup.php` | Core plugin hooks, cron processing, and RSS fetching |
+| `Xophz_Compass_Alphabet_Soup_API` | `class-xophz-compass-alphabet-soup-api.php` | REST API for feeds, fetching, and Sugar/Lemon voting |
 
 ## Frontend Routes
 

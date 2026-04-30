@@ -1,16 +1,16 @@
 <?php
 
 /**
- * The Alphabet Soup API (Post Digger)
+ * The Alphabet Soup API (Alphabet Soup)
  *
  * Handles the REST API endpoints for configuring and spawning Custom Post Types.
  *
  * @since      1.1.0
- * @package    Xophz_Compass_Post_Digger
- * @subpackage Xophz_Compass_Post_Digger/includes
+ * @package    Xophz_Compass_Alphabet_Soup
+ * @subpackage Xophz_Compass_Alphabet_Soup/includes
  */
 
-class Xophz_Compass_Post_Digger_API {
+class Xophz_Compass_Alphabet_Soup_API {
 
 	public function register_routes() {
 		register_rest_route( 'compass/v1', '/alphabet-soup/cpts', array(

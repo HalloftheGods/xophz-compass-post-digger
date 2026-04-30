@@ -22,7 +22,7 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Xophz_Compass_Post_Digger
+ * @package    Xophz_Compass_Alphabet_Soup
  */
 
 // If uninstall not called from WordPress, then exit.

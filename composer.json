@@ -1,5 +1,5 @@
 {
-  "name": "hallofthegods/xophz-compass-post-digger",
+  "name": "hallofthegods/xophz-compass-alphabet-soup",
   "description": "Quickly add, edit, delete posts in this modern-day post manager.",
   "version": "26.4.28",
   "type": "wordpress-plugin",
@@ -15,7 +15,7 @@
   },
   "autoload": {
     "files": [
-      "xophz-compass-post-digger.php"
+      "xophz-compass-alphabet-soup.php"
     ]
   }
 }

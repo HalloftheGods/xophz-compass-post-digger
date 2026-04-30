@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Xophz_Compass_Post_Digger
- * @subpackage Xophz_Compass_Post_Digger/includes
+ * @package    Xophz_Compass_Alphabet_Soup
+ * @subpackage Xophz_Compass_Alphabet_Soup/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Xophz_Compass_Post_Digger
- * @subpackage Xophz_Compass_Post_Digger/includes
+ * @package    Xophz_Compass_Alphabet_Soup
+ * @subpackage Xophz_Compass_Alphabet_Soup/includes
  * @author     Your Name <email@example.com>
  */
-class Xophz_Compass_Post_Digger_Activator {
+class Xophz_Compass_Alphabet_Soup_Activator {
 
 	/**
 	 * Short Description. (use period)

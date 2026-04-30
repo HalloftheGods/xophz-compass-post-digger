@@ -9,8 +9,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Xophz_Compass_Post_Digger
- * @subpackage Xophz_Compass_Post_Digger/includes
+ * @package    Xophz_Compass_Alphabet_Soup
+ * @subpackage Xophz_Compass_Alphabet_Soup/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Xophz_Compass_Post_Digger
- * @subpackage Xophz_Compass_Post_Digger/includes
+ * @package    Xophz_Compass_Alphabet_Soup
+ * @subpackage Xophz_Compass_Alphabet_Soup/includes
  * @author     Your Name <email@example.com>
  */
-class Xophz_Compass_Post_Digger {
+class Xophz_Compass_Alphabet_Soup {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Xophz_Compass_Post_Digger {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Xophz_Compass_Post_Digger_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Xophz_Compass_Alphabet_Soup_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -67,12 +67,12 @@ class Xophz_Compass_Post_Digger {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'XOPHZ_COMPASS_POST_DIGGER_VERSION' ) ) {
-			$this->version = XOPHZ_COMPASS_POST_DIGGER_VERSION;
+		if ( defined( 'XOPHZ_COMPASS_ALPHABET_SOUP_VERSION' ) ) {
+			$this->version = XOPHZ_COMPASS_ALPHABET_SOUP_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'xophz-compass-post-digger';
+		$this->plugin_name = 'xophz-compass-alphabet-soup';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -90,10 +90,10 @@ class Xophz_Compass_Post_Digger {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Xophz_Compass_Post_Digger_Loader. Orchestrates the hooks of the plugin.
-	 * - Xophz_Compass_Post_Digger_i18n. Defines internationalization functionality.
-	 * - Xophz_Compass_Post_Digger_Admin. Defines all hooks for the admin area.
-	 * - Xophz_Compass_Post_Digger_Public. Defines all hooks for the public side of the site.
+	 * - Xophz_Compass_Alphabet_Soup_Loader. Orchestrates the hooks of the plugin.
+	 * - Xophz_Compass_Alphabet_Soup_i18n. Defines internationalization functionality.
+	 * - Xophz_Compass_Alphabet_Soup_Admin. Defines all hooks for the admin area.
+	 * - Xophz_Compass_Alphabet_Soup_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -107,38 +107,38 @@ class Xophz_Compass_Post_Digger {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-xophz-compass-post-digger-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-xophz-compass-alphabet-soup-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-xophz-compass-post-digger-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-xophz-compass-alphabet-soup-i18n.php';
 
 		/**
 		 * The class responsible for handling REST API CPT Management.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-xophz-compass-post-digger-api.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-xophz-compass-alphabet-soup-api.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-xophz-compass-post-digger-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-xophz-compass-alphabet-soup-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-xophz-compass-post-digger-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-xophz-compass-alphabet-soup-public.php';
 
-		$this->loader = new Xophz_Compass_Post_Digger_Loader();
+		$this->loader = new Xophz_Compass_Alphabet_Soup_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Xophz_Compass_Post_Digger_i18n class in order to set the domain and to register the hook
+	 * Uses the Xophz_Compass_Alphabet_Soup_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -146,7 +146,7 @@ class Xophz_Compass_Post_Digger {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Xophz_Compass_Post_Digger_i18n();
+		$plugin_i18n = new Xophz_Compass_Alphabet_Soup_i18n();
 
 		$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain', 5 );
 
@@ -161,7 +161,7 @@ class Xophz_Compass_Post_Digger {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Xophz_Compass_Post_Digger_Admin( $this->get_xophz_compass_post_digger(), $this->get_version() );
+		$plugin_admin = new Xophz_Compass_Alphabet_Soup_Admin( $this->get_xophz_compass_alphabet_soup(), $this->get_version() );
 
 		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -171,7 +171,7 @@ class Xophz_Compass_Post_Digger {
 		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'enqueue_gutenberg_dark_mode' );
 		$this->loader->add_filter( 'block_editor_settings_all', $plugin_admin, 'inject_gutenberg_iframe_styles', 10, 2 );
 		
-		$plugin_api = new Xophz_Compass_Post_Digger_API();
+		$plugin_api = new Xophz_Compass_Alphabet_Soup_API();
 		$this->loader->add_action( 'rest_api_init', $plugin_api, 'register_routes' );
 	}
 
@@ -184,7 +184,7 @@ class Xophz_Compass_Post_Digger {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Xophz_Compass_Post_Digger_Public( $this->get_xophz_compass_post_digger(), $this->get_version() );
+		$plugin_public = new Xophz_Compass_Alphabet_Soup_Public( $this->get_xophz_compass_alphabet_soup(), $this->get_version() );
 
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -211,7 +211,7 @@ class Xophz_Compass_Post_Digger {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_xophz_compass_post_digger() {
+	public function get_xophz_compass_alphabet_soup() {
 		return $this->plugin_name;
 	}
 
@@ -219,7 +219,7 @@ class Xophz_Compass_Post_Digger {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Xophz_Compass_Post_Digger_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Xophz_Compass_Alphabet_Soup_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
@@ -263,19 +263,19 @@ class Xophz_Compass_Post_Digger {
 				}
 
 				$labels = array(
-					'name'               => _x( $plural, 'post type general name', 'xophz-compass-post-digger' ),
-					'singular_name'      => _x( $single, 'post type singular name', 'xophz-compass-post-digger' ),
-					'menu_name'          => _x( $plural, 'admin menu', 'xophz-compass-post-digger' ),
-					'name_admin_bar'     => _x( $single, 'add new on admin bar', 'xophz-compass-post-digger' ),
-					'add_new'            => _x( 'Add New', $slug, 'xophz-compass-post-digger' ),
-					'add_new_item'       => __( 'Add New ' . $single, 'xophz-compass-post-digger' ),
-					'new_item'           => __( 'New ' . $single, 'xophz-compass-post-digger' ),
-					'edit_item'          => __( 'Edit ' . $single, 'xophz-compass-post-digger' ),
-					'view_item'          => __( 'View ' . $single, 'xophz-compass-post-digger' ),
-					'all_items'          => __( 'All ' . $plural, 'xophz-compass-post-digger' ),
-					'search_items'       => __( 'Search ' . $plural, 'xophz-compass-post-digger' ),
-					'not_found'          => __( 'No ' . strtolower( $plural ) . ' found.', 'xophz-compass-post-digger' ),
-					'not_found_in_trash' => __( 'No ' . strtolower( $plural ) . ' found in Trash.', 'xophz-compass-post-digger' )
+					'name'               => _x( $plural, 'post type general name', 'xophz-compass-alphabet-soup' ),
+					'singular_name'      => _x( $single, 'post type singular name', 'xophz-compass-alphabet-soup' ),
+					'menu_name'          => _x( $plural, 'admin menu', 'xophz-compass-alphabet-soup' ),
+					'name_admin_bar'     => _x( $single, 'add new on admin bar', 'xophz-compass-alphabet-soup' ),
+					'add_new'            => _x( 'Add New', $slug, 'xophz-compass-alphabet-soup' ),
+					'add_new_item'       => __( 'Add New ' . $single, 'xophz-compass-alphabet-soup' ),
+					'new_item'           => __( 'New ' . $single, 'xophz-compass-alphabet-soup' ),
+					'edit_item'          => __( 'Edit ' . $single, 'xophz-compass-alphabet-soup' ),
+					'view_item'          => __( 'View ' . $single, 'xophz-compass-alphabet-soup' ),
+					'all_items'          => __( 'All ' . $plural, 'xophz-compass-alphabet-soup' ),
+					'search_items'       => __( 'Search ' . $plural, 'xophz-compass-alphabet-soup' ),
+					'not_found'          => __( 'No ' . strtolower( $plural ) . ' found.', 'xophz-compass-alphabet-soup' ),
+					'not_found_in_trash' => __( 'No ' . strtolower( $plural ) . ' found in Trash.', 'xophz-compass-alphabet-soup' )
 				);
 
 				$args = array(

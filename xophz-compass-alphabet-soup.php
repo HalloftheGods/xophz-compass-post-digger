@@ -10,21 +10,21 @@
  *
  * @link              http://example.com
  * @since             1.0.0
- * @package           Xophz_Compass_Post_Digger
+ * @package           Xophz_Compass_Alphabet_Soup
  *
  * @wordpress-plugin
  * Category:          Command Deck
  * Plugin Name:       Xophz Alphabet Soup
- * Plugin URI:        https://github.com/HalloftheGods/xophz-compass-post-digger
+ * Plugin URI:        https://github.com/HalloftheGods/xophz-compass-alphabet-soup
  * Description:       Quickly add, edit, delete posts in this modern-day post manager.
  * Version:           26.4.28
  * Author:            Hall of the Gods, Inc.
  * Author URI:        http://www.midknightknerd.com/xp
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       xophz-compass-post-digger
+ * Text Domain:       xophz-compass-alphabet-soup
  * Domain Path:       /languages
- * Update URI:        https://github.com/HalloftheGods/xophz-compass-post-digger
+ * Update URI:        https://github.com/HalloftheGods/xophz-compass-alphabet-soup
  */
  // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -36,34 +36,34 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'XOPHZ_COMPASS_POST_DIGGER_VERSION', '26.4.28' );
+define( 'XOPHZ_COMPASS_ALPHABET_SOUP_VERSION', '26.4.28' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-xophz-compass-post-digger-activator.php
+ * This action is documented in includes/class-xophz-compass-alphabet-soup-activator.php
  */
-function activate_xophz_compass_post_digger() {
-  require_once plugin_dir_path( __FILE__ ) . 'includes/class-xophz-compass-post-digger-activator.php';
-  Xophz_Compass_Post_Digger_Activator::activate();
+function activate_xophz_compass_alphabet_soup() {
+  require_once plugin_dir_path( __FILE__ ) . 'includes/class-xophz-compass-alphabet-soup-activator.php';
+  Xophz_Compass_Alphabet_Soup_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-xophz-compass-post-digger-deactivator.php
+ * This action is documented in includes/class-xophz-compass-alphabet-soup-deactivator.php
  */
-function deactivate_xophz_compass_post_digger() {
-  require_once plugin_dir_path( __FILE__ ) . 'includes/class-xophz-compass-post-digger-deactivator.php';
-  Xophz_Compass_Post_Digger_Deactivator::deactivate();
+function deactivate_xophz_compass_alphabet_soup() {
+  require_once plugin_dir_path( __FILE__ ) . 'includes/class-xophz-compass-alphabet-soup-deactivator.php';
+  Xophz_Compass_Alphabet_Soup_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_xophz_compass_post_digger' );
-register_deactivation_hook( __FILE__, 'deactivate_xophz_compass_post_digger' );
+register_activation_hook( __FILE__, 'activate_xophz_compass_alphabet_soup' );
+register_deactivation_hook( __FILE__, 'deactivate_xophz_compass_alphabet_soup' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-xophz-compass-post-digger.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-xophz-compass-alphabet-soup.php';
 
 /**
  * Begins execution of the plugin.
@@ -74,46 +74,46 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-xophz-compass-post-digger.
  *
  * @since    1.0.0
  */
-function run_xophz_compass_post_digger() {
+function run_xophz_compass_alphabet_soup() {
   if ( ! class_exists( 'Xophz_Compass' ) ) {
-    add_action( 'admin_init', 'shutoff_xophz_compass_post_digger' );
-    add_action( 'admin_notices', 'admin_notice_xophz_compass_post_digger' );
+    add_action( 'admin_init', 'shutoff_xophz_compass_alphabet_soup' );
+    add_action( 'admin_notices', 'admin_notice_xophz_compass_alphabet_soup' );
 
-    function shutoff_xophz_compass_post_digger() {
+    function shutoff_xophz_compass_alphabet_soup() {
       if ( ! function_exists( 'deactivate_plugins' ) ) {
         require_once ABSPATH . 'wp-admin/includes/plugin.php';
       }
       deactivate_plugins( plugin_basename( __FILE__ ) );
     }
 
-    function admin_notice_xophz_compass_post_digger() {
+    function admin_notice_xophz_compass_alphabet_soup() {
       echo '<div class="error"><h2><strong>Xophz Alphabet Soup</strong> requires Compass to run. It has self <strong>deactivated</strong>.</h2></div>';
       if ( isset( $_GET['activate'] ) )
         unset( $_GET['activate'] );
     }
   } else {
-    $plugin = new Xophz_Compass_Post_Digger();
+    $plugin = new Xophz_Compass_Alphabet_Soup();
     $plugin->run();
   }
 }
-add_action( 'plugins_loaded', 'run_xophz_compass_post_digger' );
+add_action( 'plugins_loaded', 'run_xophz_compass_alphabet_soup' );
 
 add_action( 'init', 'xophz_register_cafeteria_core_types', 10 );
 
 function xophz_register_cafeteria_core_types() {
 	// Register the Hierarchical Taxonomy (Boards / Categories)
 	$labels_taxonomy = array(
-		'name'              => _x( 'Cafeteria Boards', 'taxonomy general name', 'xophz-compass-post-digger' ),
-		'singular_name'     => _x( 'Cafeteria Board', 'taxonomy singular name', 'xophz-compass-post-digger' ),
-		'search_items'      => __( 'Search Boards', 'xophz-compass-post-digger' ),
-		'all_items'         => __( 'All Boards', 'xophz-compass-post-digger' ),
-		'parent_item'       => __( 'Parent Category', 'xophz-compass-post-digger' ),
-		'parent_item_colon' => __( 'Parent Category:', 'xophz-compass-post-digger' ),
-		'edit_item'         => __( 'Edit Board', 'xophz-compass-post-digger' ),
-		'update_item'       => __( 'Update Board', 'xophz-compass-post-digger' ),
-		'add_new_item'      => __( 'Add New Board', 'xophz-compass-post-digger' ),
-		'new_item_name'     => __( 'New Board Name', 'xophz-compass-post-digger' ),
-		'menu_name'         => __( 'Cafeteria Boards', 'xophz-compass-post-digger' ),
+		'name'              => _x( 'Cafeteria Boards', 'taxonomy general name', 'xophz-compass-alphabet-soup' ),
+		'singular_name'     => _x( 'Cafeteria Board', 'taxonomy singular name', 'xophz-compass-alphabet-soup' ),
+		'search_items'      => __( 'Search Boards', 'xophz-compass-alphabet-soup' ),
+		'all_items'         => __( 'All Boards', 'xophz-compass-alphabet-soup' ),
+		'parent_item'       => __( 'Parent Category', 'xophz-compass-alphabet-soup' ),
+		'parent_item_colon' => __( 'Parent Category:', 'xophz-compass-alphabet-soup' ),
+		'edit_item'         => __( 'Edit Board', 'xophz-compass-alphabet-soup' ),
+		'update_item'       => __( 'Update Board', 'xophz-compass-alphabet-soup' ),
+		'add_new_item'      => __( 'Add New Board', 'xophz-compass-alphabet-soup' ),
+		'new_item_name'     => __( 'New Board Name', 'xophz-compass-alphabet-soup' ),
+		'menu_name'         => __( 'Cafeteria Boards', 'xophz-compass-alphabet-soup' ),
 	);
 
 	$args_taxonomy = array(
@@ -131,20 +131,20 @@ function xophz_register_cafeteria_core_types() {
 
 	// Register the Custom Post Type (Topics / Threads)
 	$labels_cpt = array(
-		'name'                  => _x( 'Cafeteria Topics', 'Post type general name', 'xophz-compass-post-digger' ),
-		'singular_name'         => _x( 'Cafeteria Topic', 'Post type singular name', 'xophz-compass-post-digger' ),
-		'menu_name'             => _x( 'Cafeteria Topics', 'Admin Menu text', 'xophz-compass-post-digger' ),
-		'name_admin_bar'        => _x( 'Cafeteria Topic', 'Add New on Toolbar', 'xophz-compass-post-digger' ),
-		'add_new'               => __( 'Add New', 'xophz-compass-post-digger' ),
-		'add_new_item'          => __( 'Add New Topic', 'xophz-compass-post-digger' ),
-		'new_item'              => __( 'New Topic', 'xophz-compass-post-digger' ),
-		'edit_item'             => __( 'Edit Topic', 'xophz-compass-post-digger' ),
-		'view_item'             => __( 'View Topic', 'xophz-compass-post-digger' ),
-		'all_items'             => __( 'All Topics', 'xophz-compass-post-digger' ),
-		'search_items'          => __( 'Search Topics', 'xophz-compass-post-digger' ),
-		'parent_item_colon'     => __( 'Parent Topics:', 'xophz-compass-post-digger' ),
-		'not_found'             => __( 'No topics found.', 'xophz-compass-post-digger' ),
-		'not_found_in_trash'    => __( 'No topics found in Trash.', 'xophz-compass-post-digger' ),
+		'name'                  => _x( 'Cafeteria Topics', 'Post type general name', 'xophz-compass-alphabet-soup' ),
+		'singular_name'         => _x( 'Cafeteria Topic', 'Post type singular name', 'xophz-compass-alphabet-soup' ),
+		'menu_name'             => _x( 'Cafeteria Topics', 'Admin Menu text', 'xophz-compass-alphabet-soup' ),
+		'name_admin_bar'        => _x( 'Cafeteria Topic', 'Add New on Toolbar', 'xophz-compass-alphabet-soup' ),
+		'add_new'               => __( 'Add New', 'xophz-compass-alphabet-soup' ),
+		'add_new_item'          => __( 'Add New Topic', 'xophz-compass-alphabet-soup' ),
+		'new_item'              => __( 'New Topic', 'xophz-compass-alphabet-soup' ),
+		'edit_item'             => __( 'Edit Topic', 'xophz-compass-alphabet-soup' ),
+		'view_item'             => __( 'View Topic', 'xophz-compass-alphabet-soup' ),
+		'all_items'             => __( 'All Topics', 'xophz-compass-alphabet-soup' ),
+		'search_items'          => __( 'Search Topics', 'xophz-compass-alphabet-soup' ),
+		'parent_item_colon'     => __( 'Parent Topics:', 'xophz-compass-alphabet-soup' ),
+		'not_found'             => __( 'No topics found.', 'xophz-compass-alphabet-soup' ),
+		'not_found_in_trash'    => __( 'No topics found in Trash.', 'xophz-compass-alphabet-soup' ),
 	);
 
 	$args_cpt = array(

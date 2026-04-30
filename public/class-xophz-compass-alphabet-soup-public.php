@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Xophz_Compass_Post_Digger
- * @subpackage Xophz_Compass_Post_Digger/public
+ * @package    Xophz_Compass_Alphabet_Soup
+ * @subpackage Xophz_Compass_Alphabet_Soup/public
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Xophz_Compass_Post_Digger
- * @subpackage Xophz_Compass_Post_Digger/public
+ * @package    Xophz_Compass_Alphabet_Soup
+ * @subpackage Xophz_Compass_Alphabet_Soup/public
  * @author     Your Name <email@example.com>
  */
-class Xophz_Compass_Post_Digger_Public {
+class Xophz_Compass_Alphabet_Soup_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -63,15 +63,15 @@ class Xophz_Compass_Post_Digger_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Xophz_Compass_Post_Digger_Loader as all of the hooks are defined
+		 * defined in Xophz_Compass_Alphabet_Soup_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Xophz_Compass_Post_Digger_Loader will then create the relationship
+		 * The Xophz_Compass_Alphabet_Soup_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/xophz-compass-post-digger-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/xophz-compass-alphabet-soup-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -86,15 +86,15 @@ class Xophz_Compass_Post_Digger_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Xophz_Compass_Post_Digger_Loader as all of the hooks are defined
+		 * defined in Xophz_Compass_Alphabet_Soup_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Xophz_Compass_Post_Digger_Loader will then create the relationship
+		 * The Xophz_Compass_Alphabet_Soup_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/xophz-compass-post-digger-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/xophz-compass-alphabet-soup-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 
