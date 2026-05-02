@@ -14,6 +14,7 @@
  *
  * @wordpress-plugin
  * Category:          Command Deck
+ * Group:             CMS
  * Plugin Name:       Xophz Alphabet Soup
  * Plugin URI:        https://github.com/HalloftheGods/xophz-compass-alphabet-soup
  * Description:       Quickly add, edit, delete posts in this modern-day post manager.
