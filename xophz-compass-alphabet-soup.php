@@ -180,6 +180,11 @@ function xophz_register_cafeteria_board_meta() {
         'single'       => true,
         'show_in_rest' => true,
     ));
+    register_term_meta( 'cafeteria_board', 'board_order', array(
+        'type'         => 'string',
+        'single'       => true,
+        'show_in_rest' => true,
+    ));
 }
 
 add_action( 'rest_api_init', 'xophz_register_cafeteria_board_stats' );
